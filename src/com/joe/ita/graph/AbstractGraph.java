@@ -2,9 +2,9 @@ package com.joe.ita.graph;
 
 public abstract class AbstractGraph {
 
-    private final int vertexNum = 0;
+    protected int vertexNum = 0;
 
-    private int edgeNum = 0;
+    protected int edgeNum = 0;
 
     /**
      * return vertex num of the graph.
