@@ -1,6 +1,5 @@
 package com.joe.ita.graph;
 
-
 public class Graph extends AbstractGraph {
 
     private Bag[] adj;
@@ -13,6 +12,7 @@ public class Graph extends AbstractGraph {
                     "The number of vertex should be positive!");
         }
 
+        adj = new Bag[vertexNum];
         this.vertexNum = vertexNum;
         for (int i = 0; i < vertexNum; i++) {
             adj[i] = new Bag();
@@ -43,11 +43,11 @@ public class Graph extends AbstractGraph {
             return;
         }
 
-        if (index < 0 || index >= this.vertexNum - 1) {
+        if (index < 0 || index >= this.vertexNum) {
             return;
         }
 
-        Bag currentBag = adj[index];
+        Bag currentBag = adj[index++];
         currentBag.setHead(v);
     }
 
@@ -60,6 +60,9 @@ public class Graph extends AbstractGraph {
 
         for (int i = 0; i < adj.length; i++) {
             Bag bag = adj[i];
+            if (bag.isEmpty()) {
+                continue;
+            }
             Vertex headV = bag.getHead().getValue();
             if (headV.equals(v)) {
                 return i;
@@ -67,6 +70,46 @@ public class Graph extends AbstractGraph {
         }
 
         return -1;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        String lineSeparator = java.security.AccessController
+                .doPrivileged(new sun.security.action.GetPropertyAction(
+                        "line.separator"));
+        for (Bag bag : adj) {
+            sb.append(bag);
+            sb.append(lineSeparator);
+        }
+
+        return sb.substring(0, sb.lastIndexOf(lineSeparator));
+    }
+
+    public static void main(String[] args) {
+        Graph instance = new Graph(5);
+
+        Vertex a = new Vertex("1");
+        Vertex b = new Vertex("2");
+        Vertex c = new Vertex("3");
+        Vertex d = new Vertex("4");
+        Vertex e = new Vertex("5");
+        instance.addVertex(a);
+        instance.addVertex(b);
+        instance.addVertex(c);
+        instance.addVertex(d);
+        instance.addVertex(e);
+//        System.out.println(instance);
+
+        instance.addEdge(a, e);
+        instance.addEdge(d, e);
+        instance.addEdge(c, d);
+        instance.addEdge(b, a);
+        instance.addEdge(b, e);
+        instance.addEdge(b, c);
+        instance.addEdge(b, d);
+
+        System.out.println(instance);
     }
 
 }
