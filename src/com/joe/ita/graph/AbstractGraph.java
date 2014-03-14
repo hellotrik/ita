@@ -8,6 +8,7 @@ public abstract class AbstractGraph {
 
     /**
      * return vertex num of the graph.
+     * 
      * @return
      */
     public int getVertexNum() {
@@ -15,7 +16,8 @@ public abstract class AbstractGraph {
     }
 
     /**
-     *  Return edge num of the graph.
+     * Return edge num of the graph.
+     * 
      * @return
      */
     public int getEdgeNum() {
@@ -23,6 +25,7 @@ public abstract class AbstractGraph {
     }
 
     public abstract void addVertex(Vertex v);
+
     /**
      * Add one edge into the graph.
      */

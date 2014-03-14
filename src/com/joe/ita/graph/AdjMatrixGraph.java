@@ -1,22 +1,36 @@
 package com.joe.ita.graph;
 
-public class Graph extends AbstractGraph {
+import java.util.ArrayList;
+import java.util.List;
 
-    private Bag[] adj;
+public class AdjMatrixGraph extends AbstractGraph {
 
-    private int index = 0;
+    private int[][] adj;
 
-    public Graph(int vertexNum) {
+    private List<Vertex> vertices;
+
+    public AdjMatrixGraph(int vertexNum) {
         if (vertexNum <= 0) {
             throw new IllegalArgumentException(
                     "The number of vertex should be positive!");
         }
 
-        adj = new Bag[vertexNum];
         this.vertexNum = vertexNum;
+        adj = new int[vertexNum][vertexNum];
+        vertices = new ArrayList<Vertex>(vertexNum);
         for (int i = 0; i < vertexNum; i++) {
-            adj[i] = new Bag();
+            for (int j = 0; j < vertexNum; j++) {
+                adj[i][j] = 0;
+            }
         }
+    }
+
+    @Override
+    public void addVertex(Vertex v) {
+        if (isExist(v)) {
+            return;
+        }
+        vertices.add(v);
     }
 
     @Override
@@ -26,66 +40,51 @@ public class Graph extends AbstractGraph {
             throw new IllegalArgumentException("illegal vertex!");
         }
 
-        // find bags of v and w
         int vIndex = findIndexInAdj(v);
         int wIndex = findIndexInAdj(w);
-        // insert w into v's bag
-        adj[vIndex].addNode(w);
-        // insert v into w's bag
-        adj[wIndex].addNode(v);
-        //
+
+        adj[vIndex][wIndex] = 1;
         edgeNum++;
-    }
+        adj[wIndex][vIndex] = 1;
+        edgeNum++;
 
-    @Override
-    public void addVertex(Vertex v) {
-        if (isExist(v)) {
-            return;
-        }
-
-        if (index < 0 || index >= this.vertexNum) {
-            return;
-        }
-
-        Bag currentBag = adj[index++];
-        currentBag.setHead(v);
-    }
-
-    private boolean isExist(Vertex v) {
-        int index = findIndexInAdj(v);
-        return index != -1;
     }
 
     private int findIndexInAdj(Vertex v) {
 
-        for (int i = 0; i < adj.length; i++) {
-            Bag bag = adj[i];
-            if (bag.isEmpty()) {
-                continue;
-            }
-            Vertex headV = bag.getHead().getValue();
-            if (headV.equals(v)) {
+        for (int i = 0; i < vertices.size(); i++) {
+            if (vertices.get(i).equals(v)) {
                 return i;
             }
         }
-
         return -1;
+    }
+
+    private boolean isExist(Vertex v) {
+        return vertices.contains(v);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        for (Bag bag : adj) {
-            sb.append(bag);
-            sb.append(ITAUtils.lineSeparator);
+        for (int i = 0; i < vertexNum; i++) {
+            for (int j = 0; j < vertexNum; j++) {
+                sb.append(adj[i][j]);
+                if(j != vertexNum - 1){
+                    sb.append(" ");
+                }
+            }
+            if(i != vertexNum - 1){
+                sb.append(ITAUtils.lineSeparator);
+            }
         }
 
-        return sb.substring(0, sb.lastIndexOf(ITAUtils.lineSeparator));
+        return sb.toString();
     }
 
     public static void main(String[] args) {
-        Graph instance = new Graph(5);
+        AbstractGraph instance = new AdjMatrixGraph(5);
 
         Vertex a = new Vertex("1");
         Vertex b = new Vertex("2");
@@ -97,7 +96,7 @@ public class Graph extends AbstractGraph {
         instance.addVertex(c);
         instance.addVertex(d);
         instance.addVertex(e);
-//        System.out.println(instance);
+        // System.out.println(instance);
 
         instance.addEdge(a, e);
         instance.addEdge(d, e);
