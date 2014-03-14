@@ -22,6 +22,7 @@ public abstract class AbstractGraph {
         return edgeNum;
     }
 
+    public abstract void addVertex(Vertex v);
     /**
      * Add one edge into the graph.
      */
