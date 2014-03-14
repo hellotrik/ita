@@ -106,6 +106,7 @@ public class Bag {
         instance.addNode(s2);
         instance.addNode(s3);
         System.out.println(instance);
+        System.out.println(instance.getAdjVertices());
     }
 
 }
