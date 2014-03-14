@@ -109,4 +109,17 @@ public class AdjMatrixGraph extends AbstractGraph {
         System.out.println(instance);
     }
 
+    @Override
+    public Vertex[] getVertices() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public List<Vertex> getAdj(Vertex v) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+
 }

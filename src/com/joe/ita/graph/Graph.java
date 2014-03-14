@@ -1,5 +1,7 @@
 package com.joe.ita.graph;
 
+import java.util.List;
+
 public class Graph extends AbstractGraph {
 
     private Bag[] adj;
@@ -97,7 +99,7 @@ public class Graph extends AbstractGraph {
         instance.addVertex(c);
         instance.addVertex(d);
         instance.addVertex(e);
-//        System.out.println(instance);
+        // System.out.println(instance);
 
         instance.addEdge(a, e);
         instance.addEdge(d, e);
@@ -108,6 +110,23 @@ public class Graph extends AbstractGraph {
         instance.addEdge(b, d);
 
         System.out.println(instance);
+    }
+
+    @Override
+    public Vertex[] getVertices() {
+        Vertex[] vertices = new Vertex[adj.length];
+        for (int i = 0; i < adj.length; i++) {
+            vertices[i] = adj[i].getHead().getValue();
+        }
+        return vertices;
+    }
+
+    @Override
+    public List<Vertex> getAdj(Vertex v) {
+        int index = findIndexInAdj(v);
+        Bag bag = adj[index];
+
+        return bag.getAdjVertices();
     }
 
 }

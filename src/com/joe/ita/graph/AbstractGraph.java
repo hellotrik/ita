@@ -1,5 +1,7 @@
 package com.joe.ita.graph;
 
+import java.util.List;
+
 public abstract class AbstractGraph {
 
     protected int vertexNum = 0;
@@ -30,5 +32,18 @@ public abstract class AbstractGraph {
      * Add one edge into the graph.
      */
     public abstract void addEdge(Vertex v, Vertex w);
+    
+    /**
+     * Get all the vertices of this graph.
+     * @return
+     */
+    public abstract Vertex[] getVertices();
+    
+    /**
+     * Get adjancy vertices of vertex v.
+     * @param v
+     * @return
+     */
+    public abstract List<Vertex> getAdj(Vertex v);
 
 }

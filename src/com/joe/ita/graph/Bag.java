@@ -1,5 +1,8 @@
 package com.joe.ita.graph;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Bag {
 
     Node head = null;
@@ -50,6 +53,16 @@ public class Bag {
         }
         currentNode.next = wNode;
         bagNum++;
+    }
+    
+    public List<Vertex> getAdjVertices(){
+        List<Vertex> vertices = new ArrayList<Vertex>();
+        Node currentNode = head.next;
+        while(currentNode != null){
+            vertices.add(currentNode.getValue());
+            currentNode = currentNode.next;
+        }
+        return vertices;
     }
 
     public boolean isEmpty() {
