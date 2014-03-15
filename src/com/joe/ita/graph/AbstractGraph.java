@@ -29,18 +29,27 @@ public abstract class AbstractGraph {
     public abstract void addVertex(Vertex v);
 
     /**
-     * Add one edge into the graph.
+     * Add one edge (v, w) into the graph.
      */
     public abstract void addEdge(Vertex v, Vertex w);
-    
+
+    /**
+     * Add one edge e into the graph
+     * 
+     * @param e
+     */
+    public abstract void addEdge(AbstractEdge e);
+
     /**
      * Get all the vertices of this graph.
+     * 
      * @return
      */
     public abstract Vertex[] getVertices();
-    
+
     /**
      * Get adjancy vertices of vertex v.
+     * 
      * @param v
      * @return
      */

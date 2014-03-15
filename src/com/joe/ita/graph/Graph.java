@@ -2,9 +2,9 @@ package com.joe.ita.graph;
 
 import java.util.List;
 
-public class Graph extends AbstractGraph {
+public abstract class Graph extends AbstractGraph {
 
-    private Bag[] adj;
+    protected Bag[] adj;
 
     private int index = 0;
 
@@ -19,24 +19,6 @@ public class Graph extends AbstractGraph {
         for (int i = 0; i < vertexNum; i++) {
             adj[i] = new Bag();
         }
-    }
-
-    @Override
-    public void addEdge(Vertex v, Vertex w) {
-
-        if (v == null || w == null) {
-            throw new IllegalArgumentException("illegal vertex!");
-        }
-
-        // find bags of v and w
-        int vIndex = findIndexInAdj(v);
-        int wIndex = findIndexInAdj(w);
-        // insert w into v's bag
-        adj[vIndex].addNode(w);
-        // insert v into w's bag
-        adj[wIndex].addNode(v);
-        //
-        edgeNum++;
     }
 
     @Override
@@ -58,7 +40,7 @@ public class Graph extends AbstractGraph {
         return index != -1;
     }
 
-    private int findIndexInAdj(Vertex v) {
+    protected int findIndexInAdj(Vertex v) {
 
         for (int i = 0; i < adj.length; i++) {
             Bag bag = adj[i];
@@ -101,32 +83,6 @@ public class Graph extends AbstractGraph {
         Bag bag = adj[index];
 
         return bag.getAdjVertices();
-    }
-
-    public static void main(String[] args) {
-        Graph instance = new Graph(5);
-
-        Vertex a = new Vertex("1");
-        Vertex b = new Vertex("2");
-        Vertex c = new Vertex("3");
-        Vertex d = new Vertex("4");
-        Vertex e = new Vertex("5");
-        instance.addVertex(a);
-        instance.addVertex(b);
-        instance.addVertex(c);
-        instance.addVertex(d);
-        instance.addVertex(e);
-        // System.out.println(instance);
-
-        instance.addEdge(a, e);
-        instance.addEdge(d, e);
-        instance.addEdge(c, d);
-        instance.addEdge(b, a);
-        instance.addEdge(b, e);
-        instance.addEdge(b, c);
-        instance.addEdge(b, d);
-
-        System.out.println(instance);
     }
 
 }

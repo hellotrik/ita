@@ -121,5 +121,11 @@ public class AdjMatrixGraph extends AbstractGraph {
         return null;
     }
 
+    @Override
+    public void addEdge(AbstractEdge e) {
+        // TODO Auto-generated method stub
+        
+    }
+
 
 }

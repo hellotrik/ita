@@ -55,7 +55,7 @@ public class BFS {
     }
 
     public static void main(String[] args) {
-        Graph graph = new Graph(8);
+        Graph graph = new UnDirectedGraph(8);
 
         Vertex r = new Vertex("r");
         Vertex s = new Vertex("s");
