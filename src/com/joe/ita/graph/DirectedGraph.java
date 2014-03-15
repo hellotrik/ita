@@ -9,7 +9,7 @@ public class DirectedGraph extends Graph {
     @Override
     public void addEdge(Vertex v, Vertex w) {
         if (v == null || w == null) {
-            throw new IllegalArgumentException("illegal vertex!");
+            throw new IllegalArgumentException("illegal parameters, v or w can't be null!");
         }
 
         // find bags of v and w
