@@ -85,6 +85,23 @@ public class Graph extends AbstractGraph {
 
         return sb.substring(0, sb.lastIndexOf(ITAUtils.lineSeparator));
     }
+    
+    @Override
+    public Vertex[] getVertices() {
+        Vertex[] vertices = new Vertex[adj.length];
+        for (int i = 0; i < adj.length; i++) {
+            vertices[i] = adj[i].getHead().getValue();
+        }
+        return vertices;
+    }
+
+    @Override
+    public List<Vertex> getAdj(Vertex v) {
+        int index = findIndexInAdj(v);
+        Bag bag = adj[index];
+
+        return bag.getAdjVertices();
+    }
 
     public static void main(String[] args) {
         Graph instance = new Graph(5);
@@ -110,23 +127,6 @@ public class Graph extends AbstractGraph {
         instance.addEdge(b, d);
 
         System.out.println(instance);
-    }
-
-    @Override
-    public Vertex[] getVertices() {
-        Vertex[] vertices = new Vertex[adj.length];
-        for (int i = 0; i < adj.length; i++) {
-            vertices[i] = adj[i].getHead().getValue();
-        }
-        return vertices;
-    }
-
-    @Override
-    public List<Vertex> getAdj(Vertex v) {
-        int index = findIndexInAdj(v);
-        Bag bag = adj[index];
-
-        return bag.getAdjVertices();
     }
 
 }
