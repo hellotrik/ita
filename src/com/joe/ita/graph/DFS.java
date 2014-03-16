@@ -1,7 +1,12 @@
 package com.joe.ita.graph;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Depth First Search
@@ -15,19 +20,21 @@ public class DFS {
     private Map<Vertex, Vertex> parentMap = new HashMap<Vertex, Vertex>();
     private Map<Vertex, Integer> discoverMap = new HashMap<Vertex, Integer>();
     private Map<Vertex, Integer> finishMap = new HashMap<Vertex, Integer>();
-    
+
+    private List<ArrayList<Vertex>> stronglyConnectedComponents = new ArrayList<ArrayList<Vertex>>();
+
     private static int time = 0;
 
     public void depthFirstSearch(Graph g) {
 
-        for(Vertex v : g.getVertices()){
+        for (Vertex v : g.getVertices()) {
             colorMap.put(v, Color.WHITE);
             parentMap.put(v, null);
         }
 
         time = 0;
-        for(Vertex v : g.getVertices()){
-            if(colorMap.get(v) == Color.WHITE){
+        for (Vertex v : g.getVertices()) {
+            if (colorMap.get(v) == Color.WHITE) {
                 dfsVisit(g, v);
             }
         }
@@ -35,22 +42,88 @@ public class DFS {
     }
 
     /**
+     * Helper classes for SCC.java
+     * 
+     * @param g
+     */
+    public void depthFirstSearchByTopoSort(Graph g,
+            final Map<Vertex, Integer> topoSortMap) {
+
+        List<Vertex> sortedAdjVertices = g.getVerticesByTopoSort(topoSortMap);
+        for (Vertex v : sortedAdjVertices) {
+            colorMap.put(v, Color.WHITE);
+            parentMap.put(v, null);
+        }
+
+        time = 0;
+        for (Vertex v : sortedAdjVertices) {
+            if (colorMap.get(v) == Color.WHITE) {
+                dfsVisitByTopoSort(g, v, topoSortMap);
+                System.out.println("colorMap: " + colorMap);
+                collectBlackVertices(g);
+            }
+        }
+
+    }
+
+    private void collectBlackVertices(Graph g) {
+        ArrayList<Vertex> component = new ArrayList<Vertex>();
+        for (Vertex v : g.getVertices()) {
+            if (colorMap.get(v) == Color.BLACK && isNewVertex(v)) {
+                component.add(v);
+            }
+        }
+
+        stronglyConnectedComponents.add(component);
+    }
+
+    private boolean isNewVertex(Vertex v) {
+        for (List<Vertex> list : stronglyConnectedComponents) {
+            if (list.contains(v)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private void dfsVisitByTopoSort(Graph g, Vertex v,
+            final Map<Vertex, Integer> topoSortMap) {
+        colorMap.put(v, Color.GRAY);
+        discoverMap.put(v, ++time);
+        for (Vertex w : g.getAdjByTopoSort(v, topoSortMap)) {
+            if (colorMap.get(w) == Color.WHITE) {
+                parentMap.put(w, v);
+                dfsVisitByTopoSort(g, w, topoSortMap);
+            }
+        }
+        colorMap.put(v, Color.BLACK);
+        finishMap.put(v, ++time);
+
+    }
+
+    /**
      * Get finish time of each vertex in dfs.
+     * 
      * @return
      */
-    public Map<Vertex, Integer> getFinshTime(){
+    public Map<Vertex, Integer> getFinshTime() {
         return finishMap;
     }
-    
-    public Map<Vertex, Vertex> getParent(){
+
+    public Map<Vertex, Vertex> getParent() {
         return parentMap;
+    }
+
+    public  List<ArrayList<Vertex>> getStronglyConnectedComponents(){
+        return stronglyConnectedComponents;
     }
 
     private void dfsVisit(Graph g, Vertex v) {
         colorMap.put(v, Color.GRAY);
         discoverMap.put(v, ++time);
-        for(Vertex w : g.getAdj(v)){
-            if(colorMap.get(w) == Color.WHITE){
+        for (Vertex w : g.getAdj(v)) {
+            if (colorMap.get(w) == Color.WHITE) {
                 parentMap.put(w, v);
                 dfsVisit(g, w);
             }

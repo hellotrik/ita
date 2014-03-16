@@ -26,16 +26,25 @@ public class TopologicalSort {
         return mappingList;
     }
 
-    public List<Map.Entry<Vertex, Integer>> topologicalSort(Graph g) {
+    public List<Vertex> topologicalSort(Graph g) {
+        List<Map.Entry<Vertex, Integer>> entrylist = topologicalSort2Entry(g);
+
+        List<Vertex> list = new ArrayList<Vertex>();
+        for(Map.Entry<Vertex, Integer> entry : entrylist){
+            list.add(entry.getKey());
+        }
+
+        return list;
+    }
+
+    public List<Map.Entry<Vertex, Integer>>  topologicalSort2Entry(Graph g) {
         DFS dfs = new DFS();
 
         dfs.depthFirstSearch(g);
         Map<Vertex, Integer> finishTime = dfs.getFinshTime();
-        System.out.println(finishTime);
-        List<Map.Entry<Vertex, Integer>> list = sortByValue(finishTime);
-        System.out.println(list);
-        System.out.println(dfs.getParent());
-        return list;
+//        System.out.println(finishTime);
+        List<Map.Entry<Vertex, Integer>> entrylist = sortByValue(finishTime);
+        return entrylist;
     }
 
     public static void main(String[] args) {

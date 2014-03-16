@@ -1,5 +1,10 @@
 package com.joe.ita.graph;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class DirectedEdge extends AbstractEdge{
 
     public DirectedEdge(Vertex s, Vertex e, int weight) {
@@ -22,5 +27,20 @@ public class DirectedEdge extends AbstractEdge{
         return getW();
     }
 
+    public static void main(String[] args) {
+        List<Vertex> list = new ArrayList<Vertex>();
+        
+        Vertex a = new Vertex("good");
+        list.add(a);
+        
+        Vertex b = new Vertex("good");
+        System.out.println(list.contains(b));
+        
+        Map<Vertex, Integer> map = new HashMap<Vertex, Integer>();
+        
+        map.put(a, 10);
+        System.out.println(map.get(a));
+        System.out.println(map.get(b));
+    }
 
 }
