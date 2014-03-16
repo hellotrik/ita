@@ -64,4 +64,9 @@ public class UnDirectedGraph extends Graph {
 
     }
 
+    @Override
+    public String getEdgesSeperator() {
+        return ITAConstants.UNDIRECTED_EDGE_FLAG;
+    }
+
 }

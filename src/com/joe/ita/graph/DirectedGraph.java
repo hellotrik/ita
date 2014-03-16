@@ -56,4 +56,9 @@ public class DirectedGraph extends Graph {
         System.out.println(instance);
         System.out.println("edge number:" + instance.getEdgeNum());
     }
+
+    @Override
+    public String getEdgesSeperator() {
+        return ITAConstants.DIRECTED_EDGE_FLAG;
+    }
 }

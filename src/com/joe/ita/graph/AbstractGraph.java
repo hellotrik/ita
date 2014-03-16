@@ -54,5 +54,15 @@ public abstract class AbstractGraph {
      * @return
      */
     public abstract List<Vertex> getAdj(Vertex v);
+    
+    /**
+     * Get the seperator of edges 
+     * for example:
+     * directed edge:   a->b
+     * undircted edge:  a--b
+     * 
+     * @return
+     */
+    public abstract String getEdgesSeperator();
 
 }

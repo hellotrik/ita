@@ -127,5 +127,11 @@ public class AdjMatrixGraph extends AbstractGraph {
         
     }
 
+    @Override
+    public String getEdgesSeperator() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 
 }
