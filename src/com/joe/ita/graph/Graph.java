@@ -1,5 +1,6 @@
 package com.joe.ita.graph;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Graph extends AbstractGraph {
@@ -85,4 +86,15 @@ public abstract class Graph extends AbstractGraph {
         return bag.getAdjVertices();
     }
 
+    /**
+     * Get all bag of the graph.
+     * @return
+     */
+    public List<Bag> getAllBag(){
+        List<Bag> list = new ArrayList<Bag>();
+        for(Bag bag : adj){
+            list.add(bag);
+        }
+        return list;
+    }
 }
