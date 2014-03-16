@@ -11,10 +11,10 @@ import java.util.Map;
  */
 public class DFS {
 
-    Map<Vertex, Color> colorMap = new HashMap<Vertex, Color>();
+    private Map<Vertex, Color> colorMap = new HashMap<Vertex, Color>();
     private Map<Vertex, Vertex> parentMap = new HashMap<Vertex, Vertex>();
-    Map<Vertex, Integer> discoverMap = new HashMap<Vertex, Integer>();
-    Map<Vertex, Integer> finishMap = new HashMap<Vertex, Integer>();
+    private Map<Vertex, Integer> discoverMap = new HashMap<Vertex, Integer>();
+    private Map<Vertex, Integer> finishMap = new HashMap<Vertex, Integer>();
     
     private static int time = 0;
 
@@ -32,6 +32,18 @@ public class DFS {
             }
         }
 
+    }
+
+    /**
+     * Get finish time of each vertex in dfs.
+     * @return
+     */
+    public Map<Vertex, Integer> getFinshTime(){
+        return finishMap;
+    }
+    
+    public Map<Vertex, Vertex> getParent(){
+        return parentMap;
     }
 
     private void dfsVisit(Graph g, Vertex v) {
