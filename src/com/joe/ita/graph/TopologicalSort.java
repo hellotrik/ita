@@ -9,6 +9,35 @@ import java.util.Map.Entry;
 
 public class TopologicalSort {
 
+    private List<Map.Entry<Vertex, Integer>> sortByValue(
+            Map<Vertex, Integer> finishTime) {
+        List<Map.Entry<Vertex, Integer>> mappingList = new ArrayList<Map.Entry<Vertex, Integer>>(
+                finishTime.entrySet());
+
+        Collections.sort(mappingList,
+                new Comparator<Map.Entry<Vertex, Integer>>() {
+                    @Override
+                    public int compare(Entry<Vertex, Integer> o1,
+                            Entry<Vertex, Integer> o2) {
+                        return o2.getValue().compareTo(o1.getValue());
+                    }
+                });
+
+        return mappingList;
+    }
+
+    public List<Map.Entry<Vertex, Integer>> topologicalSort(Graph g) {
+        DFS dfs = new DFS();
+
+        dfs.depthFirstSearch(g);
+        Map<Vertex, Integer> finishTime = dfs.getFinshTime();
+        System.out.println(finishTime);
+        List<Map.Entry<Vertex, Integer>> list = sortByValue(finishTime);
+        System.out.println(list);
+        System.out.println(dfs.getParent());
+        return list;
+    }
+
     public static void main(String[] args) {
         Graph g = new DirectedGraph(9);
 
@@ -46,35 +75,6 @@ public class TopologicalSort {
         TopologicalSort instance = new TopologicalSort();
         instance.topologicalSort(g);
 
-    }
-
-    private List<Map.Entry<Vertex, Integer>> sortByValue(
-            Map<Vertex, Integer> finishTime) {
-        List<Map.Entry<Vertex, Integer>> mappingList = new ArrayList<Map.Entry<Vertex, Integer>>(
-                finishTime.entrySet());
-
-        Collections.sort(mappingList,
-                new Comparator<Map.Entry<Vertex, Integer>>() {
-                    @Override
-                    public int compare(Entry<Vertex, Integer> o1,
-                            Entry<Vertex, Integer> o2) {
-                        return o2.getValue().compareTo(o1.getValue());
-                    }
-                });
-
-        return mappingList;
-    }
-
-    public List<Map.Entry<Vertex, Integer>> topologicalSort(Graph g) {
-        DFS dfs = new DFS();
-
-        dfs.depthFirstSearch(g);
-        Map<Vertex, Integer> finishTime = dfs.getFinshTime();
-        System.out.println(finishTime);
-        List<Map.Entry<Vertex, Integer>> list = sortByValue(finishTime);
-        System.out.println(list);
-        System.out.println(dfs.getParent());
-        return list; 
     }
 
 }
