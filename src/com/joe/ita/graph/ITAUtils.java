@@ -40,7 +40,17 @@ public class ITAUtils {
         for (String e : edgeArr) {
             String[] vw = e.split(g.getEdgesSeperator());
             // System.out.println(vw[1]);
-            g.addEdge(new Vertex(vw[0]), new Vertex(vw[1]));
+            if(vw[1].contains("_")){
+                // weight graph
+                String[] vertexWeight = vw[1].split("_");
+                String wVertexStr = vertexWeight[0];
+                int weight = Integer.valueOf(vertexWeight[1]).intValue();
+                Edge edge = new Edge(new Vertex(vw[0]), new Vertex(wVertexStr), weight);
+                g.addEdge(edge);
+            } else {
+                // non-weight graph
+                g.addEdge(new Vertex(vw[0]), new Vertex(vw[1]));
+            }
         }
 
     }
@@ -76,7 +86,7 @@ public class ITAUtils {
 
     public static void main(String[] args) {
         String vertices = "a, b, c";
-        String edges = "a->b, c->b";
+        String edges = "a->b_10, c->b_9";
         Graph g = newGraph(vertices, edges);
         System.out.println(g);
 

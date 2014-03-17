@@ -109,7 +109,12 @@ public class Bag {
 
         @Override
         public String toString() {
-            return v.toString();
+            StringBuilder sb = new StringBuilder();
+            sb.append(v.toString());
+            if(e.getWeight() != 0){
+                sb.append("_" + e.getWeight());
+            }
+            return sb.toString();
         }
 
     }
