@@ -1,6 +1,6 @@
 package com.joe.ita.graph;
 
-public class UnDirectedEdge extends AbstractEdge{
+public class UnDirectedEdge extends Edge{
 
     public UnDirectedEdge(Vertex s, Vertex e, int weight) {
         super.setV(s);

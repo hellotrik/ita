@@ -24,16 +24,17 @@ public class UnDirectedGraph extends Graph {
     }
 
     @Override
-    public void addEdge(AbstractEdge e) {
-        if (!(e instanceof UnDirectedEdge)) {
-            throw new IllegalArgumentException(
-                    "illegal parameter, e must be UnDirectedEdge");
-        }
-
-        UnDirectedEdge edge = (UnDirectedEdge) e;
-        Vertex v = edge.getOneVertex();
-        addEdge(edge.getOneVertex(), edge.getTheOtherVetex(v));
-
+    public void addEdge(Edge e) {
+        // find bags of v and w
+        int vIndex = findIndexInAdj(e.getV());
+        int wIndex = findIndexInAdj(e.getW());
+        // insert w into v's bag
+        adj[vIndex].addEdge(e);
+        edgeNum++;
+        // insert v into w's bag
+        adj[wIndex].addEdge(e);
+        edgeNum++;
+        
     }
 
     public static void main(String[] args) {

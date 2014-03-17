@@ -14,7 +14,7 @@ public class Bag {
     }
 
     public Bag(Vertex v) {
-        head = new Node(v);
+        head = new Node(v, v);
         bagNum++;
     }
 
@@ -37,7 +37,7 @@ public class Bag {
     }
 
     public void setHead(Vertex v) {
-        head = new Node(v);
+        head = new Node(v, v);
         bagNum++;
     }
 
@@ -46,7 +46,7 @@ public class Bag {
     }
 
     public void addNode(Vertex w) {
-        Node wNode = new Node(w);
+        Node wNode = new Node(head.getValue(), w);
         Node currentNode = head;
         while (currentNode.next != null) {
             currentNode = currentNode.next;
@@ -54,11 +54,21 @@ public class Bag {
         currentNode.next = wNode;
         bagNum++;
     }
-    
-    public List<Vertex> getAdjVertices(){
+
+    public void addEdge(Edge e) {
+        Node wNode = new Node(head.getValue(), e);
+        Node currentNode = head;
+        while (currentNode.next != null) {
+            currentNode = currentNode.next;
+        }
+        currentNode.next = wNode;
+        bagNum++;
+    }
+
+    public List<Vertex> getAdjVertices() {
         List<Vertex> vertices = new ArrayList<Vertex>();
         Node currentNode = head.next;
-        while(currentNode != null){
+        while (currentNode != null) {
             vertices.add(currentNode.getValue());
             currentNode = currentNode.next;
         }
@@ -71,10 +81,18 @@ public class Bag {
 
     class Node {
         Vertex v = null;
+        Edge e = null;
+
         Node next = null;
 
-        public Node(Vertex v2) {
-            v = v2;
+        public Node(Vertex headVertex, Vertex v) {
+            this.v = v;
+            this.e = new Edge(headVertex, v);
+        }
+
+        public Node(Vertex headVertex, Edge e) {
+            this.e = e;
+            v = e.getTheOtherVetex(headVertex);
         }
 
         public Vertex getValue() {
@@ -83,6 +101,10 @@ public class Bag {
 
         public Node getNext() {
             return next;
+        }
+
+        public Edge getEdge() {
+            return e;
         }
 
         @Override

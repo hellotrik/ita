@@ -20,14 +20,17 @@ public class DirectedGraph extends Graph {
     }
 
     @Override
-    public void addEdge(AbstractEdge e) {
-        if (!(e instanceof DirectedEdge)) {
-            throw new IllegalArgumentException(
-                    "illegal parameter, e must be DirectedEdge");
-        }
+    public void addEdge(Edge e) {
+//        if (!(e instanceof DirectedEdge)) {
+//            throw new IllegalArgumentException(
+//                    "illegal parameter, e must be DirectedEdge");
+//        }
 
-        DirectedEdge edge = (DirectedEdge) e;
-        addEdge(edge.getStartVertex(), edge.getEndVertex());
+        // find bags of v and w
+        int vIndex = findIndexInAdj(e.getV());
+        // insert w into v's bag
+        adj[vIndex].addEdge(e);
+        edgeNum++;
 
     }
     public static void main(String[] args) {

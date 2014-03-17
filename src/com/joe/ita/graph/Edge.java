@@ -1,11 +1,26 @@
 package com.joe.ita.graph;
 
-public abstract class AbstractEdge {
+public class Edge {
 
     private Vertex v = null;
     private Vertex w = null;
 
     private int weight = 0;
+
+    public Edge(){
+        ;
+    }
+    
+    public Edge(Vertex v, Vertex w, int weight) {
+        this.v = v;
+        this.w = w;
+        this.weight = weight;
+    }
+
+    public Edge(Vertex v, Vertex w) {
+        this.v = v;
+        this.w = w;
+    }
 
     public Vertex getV() {
         return v;
@@ -45,5 +60,15 @@ public abstract class AbstractEdge {
             throw new IllegalArgumentException("This vertex doesn't belong to this edge.");
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Edge)){
+            return false;
+        }
+        Edge e = (Edge)obj;
+        return e.getV().equals(this.getV()) && e.getW().equals(this.getW());
+    }
+    
 
 }

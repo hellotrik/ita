@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DirectedEdge extends AbstractEdge{
+public class DirectedEdge extends Edge{
 
     public DirectedEdge(Vertex s, Vertex e, int weight) {
         super.setV(s);

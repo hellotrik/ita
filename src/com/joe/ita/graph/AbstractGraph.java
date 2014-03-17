@@ -38,7 +38,7 @@ public abstract class AbstractGraph {
      * 
      * @param e
      */
-    public abstract void addEdge(AbstractEdge e);
+    public abstract void addEdge(Edge e);
 
     /**
      * Get all the vertices of this graph.

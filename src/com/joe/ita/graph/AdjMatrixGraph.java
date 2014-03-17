@@ -122,7 +122,7 @@ public class AdjMatrixGraph extends AbstractGraph {
     }
 
     @Override
-    public void addEdge(AbstractEdge e) {
+    public void addEdge(Edge e) {
         // TODO Auto-generated method stub
         
     }
