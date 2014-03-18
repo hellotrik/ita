@@ -154,4 +154,14 @@ public abstract class Graph extends AbstractGraph {
      * @return
      */
     public abstract boolean isExist(List<Edge> list, Edge e);
+
+    public int getWeight(Vertex v, Vertex w) {
+        List<Edge> edgeList = getAllEdges();
+        for(Edge e : edgeList){
+            if(e.getV().equals(v) && e.getW().equals(w)){
+                return e.getWeight();
+            }
+        }
+        return Integer.MAX_VALUE;
+    }
 }

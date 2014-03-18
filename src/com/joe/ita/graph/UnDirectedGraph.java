@@ -56,6 +56,18 @@ public class UnDirectedGraph extends Graph {
         }
         return false;
     }
+    
+    
+
+    @Override
+    public int getWeight(Vertex v, Vertex w) {
+        int weight = super.getWeight(v, w);
+        if(weight == Integer.MAX_VALUE){
+            return super.getWeight(w, v);
+        } else {
+            return weight;
+        }
+    }
 
     public static void main(String[] args) {
         Graph instance = new UnDirectedGraph(5);
