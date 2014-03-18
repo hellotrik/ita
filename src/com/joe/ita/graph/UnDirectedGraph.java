@@ -1,5 +1,8 @@
 package com.joe.ita.graph;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UnDirectedGraph extends Graph {
 
     public UnDirectedGraph(int vertexNum) {
@@ -17,7 +20,7 @@ public class UnDirectedGraph extends Graph {
         int wIndex = findIndexInAdj(w);
         // insert w into v's bag
         adj[vIndex].addNode(w);
-        edgeNum++;
+//        edgeNum++;
         // insert v into w's bag
         adj[wIndex].addNode(v);
         edgeNum++;
@@ -30,11 +33,28 @@ public class UnDirectedGraph extends Graph {
         int wIndex = findIndexInAdj(e.getW());
         // insert w into v's bag
         adj[vIndex].addEdge(e);
-        edgeNum++;
+//        edgeNum++;
         // insert v into w's bag
         adj[wIndex].addEdge(e);
         edgeNum++;
-        
+
+    }
+
+    @Override
+    public String getEdgesSeperator() {
+        return ITAConstants.UNDIRECTED_EDGE_FLAG;
+    }
+
+    @Override
+    public boolean isExist(List<Edge> edgeList, Edge e) {
+        for (Edge edge : edgeList) {
+            if (edge.equals(e)
+                    || (edge.getV().equals(e.getW()) && edge.getW().equals(
+                            e.getV()))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static void main(String[] args) {
@@ -63,11 +83,6 @@ public class UnDirectedGraph extends Graph {
         System.out.println(instance);
         System.out.println("edge number:" + instance.getEdgeNum());
 
-    }
-
-    @Override
-    public String getEdgesSeperator() {
-        return ITAConstants.UNDIRECTED_EDGE_FLAG;
     }
 
 }

@@ -1,5 +1,7 @@
 package com.joe.ita.graph;
 
+import java.util.List;
+
 public class DirectedGraph extends Graph {
 
     public DirectedGraph(int vertexNum) {
@@ -63,5 +65,10 @@ public class DirectedGraph extends Graph {
     @Override
     public String getEdgesSeperator() {
         return ITAConstants.DIRECTED_EDGE_FLAG;
+    }
+
+    @Override
+    public boolean isExist(List<Edge> list, Edge e) {
+        return list.contains(e);
     }
 }

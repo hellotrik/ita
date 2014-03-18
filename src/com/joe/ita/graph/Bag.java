@@ -75,6 +75,16 @@ public class Bag {
         return vertices;
     }
 
+    public List<Edge> getAdjEdges() {
+        List<Edge> edges = new ArrayList<Edge>();
+        Node currentNode = head.next;
+        while (currentNode != null) {
+            edges.add(currentNode.getEdge());
+            currentNode = currentNode.next;
+        }
+        return edges;
+    }
+
     public boolean isEmpty() {
         return (bagNum == 0);
     }

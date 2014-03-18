@@ -127,4 +127,31 @@ public abstract class Graph extends AbstractGraph {
         }
         return list;
     }
+    
+    /**
+     * Get all edges of this graph.
+     * @return
+     */
+    public List<Edge> getAllEdges() {
+        List<Edge> edgeList = new ArrayList<Edge>();
+        for(Bag bag : adj){
+            List<Edge> edges = bag.getAdjEdges();
+//            System.out.println("------edges:" + edges);
+            for(Edge e : edges){
+                if(!isExist(edgeList, e)){
+                    edgeList.add(e);
+                }
+            }
+//            System.out.println("------edgeList:" + edgeList);
+        }
+        return edgeList;
+    }
+    
+    /**
+     * 
+     * @param list
+     * @param e
+     * @return
+     */
+    public abstract boolean isExist(List<Edge> list, Edge e);
 }
