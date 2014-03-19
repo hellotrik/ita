@@ -20,6 +20,10 @@ public class SingleSourceShortestPaths {
     }
 
     public void relax(Vertex u, Vertex v, int w) {
+        if(distanceMap.get(u) == Integer.MAX_VALUE){
+            return;
+        }
+        
         if (distanceMap.get(v) > distanceMap.get(u) + w) {
             distanceMap.put(v, distanceMap.get(u) + w);
             parentMap.put(v, u);

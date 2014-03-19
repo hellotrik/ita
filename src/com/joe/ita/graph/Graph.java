@@ -71,7 +71,7 @@ public abstract class Graph extends AbstractGraph {
 
         return sb.substring(0, sb.lastIndexOf(ITAUtils.lineSeparator));
     }
-    
+
     @Override
     public Vertex[] getVertices() {
         Vertex[] vertices = new Vertex[adj.length];
@@ -81,7 +81,8 @@ public abstract class Graph extends AbstractGraph {
         return vertices;
     }
 
-    public List<Vertex> getVerticesByTopoSort(final Map<Vertex, Integer> topoSortMap) {
+    public List<Vertex> getVerticesByTopoSort(
+            final Map<Vertex, Integer> topoSortMap) {
         Vertex[] adjVertices = getVertices();
         List<Vertex> sortedAdjVertices = new ArrayList<Vertex>();
         for (Vertex v : adjVertices) {
@@ -110,7 +111,8 @@ public abstract class Graph extends AbstractGraph {
         return bag.getAdjVertices();
     }
 
-    public List<Vertex> getAdjByTopoSort(Vertex v, final Map<Vertex, Integer> topoSortMap) {
+    public List<Vertex> getAdjByTopoSort(Vertex v,
+            final Map<Vertex, Integer> topoSortMap) {
         List<Vertex> adjs = getAdj(v);
         sortList(topoSortMap, adjs);
         return adjs;
@@ -118,35 +120,43 @@ public abstract class Graph extends AbstractGraph {
 
     /**
      * Get all bag of the graph.
+     * 
      * @return
      */
-    public List<Bag> getAllBag(){
+    public List<Bag> getAllBag() {
         List<Bag> list = new ArrayList<Bag>();
-        for(Bag bag : adj){
+        for (Bag bag : adj) {
             list.add(bag);
         }
         return list;
     }
-    
+
     /**
      * Get all edges of this graph.
+     * 
      * @return
      */
     public List<Edge> getAllEdges() {
         List<Edge> edgeList = new ArrayList<Edge>();
-        for(Bag bag : adj){
+        for (Bag bag : adj) {
             List<Edge> edges = bag.getAdjEdges();
-//            System.out.println("------edges:" + edges);
-            for(Edge e : edges){
-                if(!isExist(edgeList, e)){
+            // System.out.println("------edges:" + edges);
+            for (Edge e : edges) {
+                if (!isExist(edgeList, e)) {
                     edgeList.add(e);
                 }
             }
-//            System.out.println("------edgeList:" + edgeList);
+            // System.out.println("------edgeList:" + edgeList);
         }
         return edgeList;
     }
-    
+
+    public List<Edge> getAdjEdges(Vertex v) {
+        int index = findIndexInAdj(v);
+        Bag bag = adj[index];
+        return bag.getAdjEdges();
+    }
+
     /**
      * 
      * @param list
@@ -157,8 +167,8 @@ public abstract class Graph extends AbstractGraph {
 
     public int getWeight(Vertex v, Vertex w) {
         List<Edge> edgeList = getAllEdges();
-        for(Edge e : edgeList){
-            if(e.getV().equals(v) && e.getW().equals(w)){
+        for (Edge e : edgeList) {
+            if (e.getV().equals(v) && e.getW().equals(w)) {
                 return e.getWeight();
             }
         }

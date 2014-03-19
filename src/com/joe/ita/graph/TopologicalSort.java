@@ -46,6 +46,14 @@ public class TopologicalSort {
         List<Map.Entry<Vertex, Integer>> entrylist = sortByValue(finishTime);
         return entrylist;
     }
+    
+    public Map<Vertex, Integer> getFinishTime(Graph g){
+        DFS dfs = new DFS();
+
+        dfs.depthFirstSearch(g);
+        Map<Vertex, Integer> finishTime = dfs.getFinshTime();
+        return finishTime;
+    }
 
     public static void main(String[] args) {
         Graph g = new DirectedGraph(9);
