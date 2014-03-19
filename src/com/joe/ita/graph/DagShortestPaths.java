@@ -15,8 +15,8 @@ public class DagShortestPaths extends SingleSourceShortestPaths {
         System.out.println("after init:" + parentMap);
 
         for (Vertex v : sortedVertices) {
-            List<Vertex> adjList = g.getAdjByTopoSort(v, ts.getFinishTime(g));
-            
+//            List<Vertex> adjList = g.getAdjByTopoSort(v, ts.getFinishTime(g));
+            List<Vertex> adjList = g.getAdj(v);
             System.out.println("v:" + v + "==>" + adjList);
             for (Vertex w : adjList) {
                 int weight = g.getWeight(v, w);
