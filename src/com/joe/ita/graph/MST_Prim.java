@@ -15,21 +15,6 @@ public class MST_Prim {
 
     Map<Vertex, Vertex> parentMap = new HashMap<Vertex, Vertex>();
 
-    public static void main(String[] args) {
-        String vertices = "a, b, c, d, e, f, g, h, i";
-
-        String edges = "a--b_4, b--c_8, c--d_7, d--e_9, e--f_10, "
-                + "f--g_2, g--h_1, h--a_8, b--h_11, h--i_7, i--g_6, i--c_2, c--f_4, f--d_14";
-        Graph g = ITAUtils.newGraph(vertices, edges);
-        System.out.println(g);
-        System.out.println("edge num:" + g.getEdgeNum());
-        System.out.println("vertex num:" + g.getVertexNum());
-
-        MST_Prim instance = new MST_Prim();
-        Vertex a = new Vertex("a");
-        System.out.println("Prim MST:" + instance.traverse(g, a));
-
-    }
 
     private List<Edge> traverse(Graph g, Vertex a) {
         List<Edge> mst = new ArrayList<Edge>();
@@ -111,6 +96,22 @@ public class MST_Prim {
 
     private Vertex exactMin(Queue<Vertex> queue) {
         return queue.poll();
+    }
+    
+    public static void main(String[] args) {
+        String vertices = "a, b, c, d, e, f, g, h, i";
+
+        String edges = "a--b_4, b--c_8, c--d_7, d--e_9, e--f_10, "
+                + "f--g_2, g--h_1, h--a_8, b--h_11, h--i_7, i--g_6, i--c_2, c--f_4, f--d_14";
+        Graph g = ITAUtils.newGraph(vertices, edges);
+        System.out.println(g);
+        System.out.println("edge num:" + g.getEdgeNum());
+        System.out.println("vertex num:" + g.getVertexNum());
+
+        MST_Prim instance = new MST_Prim();
+        Vertex a = new Vertex("a");
+        System.out.println("Prim MST:" + instance.traverse(g, a));
+
     }
 
 }
